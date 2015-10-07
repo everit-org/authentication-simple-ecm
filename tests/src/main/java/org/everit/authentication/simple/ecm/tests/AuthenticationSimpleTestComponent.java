@@ -71,8 +71,8 @@ public class AuthenticationSimpleTestComponent {
       SimpleSubject simpleSubject =
           simpleSubjectManager.create(resourceId, principal, plainCredential);
       Assert.assertNotNull(simpleSubject);
-      Assert.assertEquals(principal, simpleSubject.getPrincipal());
-      Assert.assertEquals(resourceId, simpleSubject.getResourceId());
+      Assert.assertEquals(principal, simpleSubject.principal);
+      Assert.assertEquals(resourceId, simpleSubject.resourceId);
       return simpleSubject;
     });
   }
@@ -160,10 +160,9 @@ public class AuthenticationSimpleTestComponent {
         simpleSubjectManager.readEncryptedCredential(newPrincipal));
 
     simpleSubject = simpleSubjectManager.readSimpleSubjectByPrincipal(newPrincipal);
-    Assert.assertEquals(originalSimpleSubject.getSimpleSubjectId(),
-        simpleSubject.getSimpleSubjectId());
-    Assert.assertEquals(originalSimpleSubject.getResourceId(), simpleSubject.getResourceId());
-    Assert.assertEquals(newPrincipal, simpleSubject.getPrincipal());
+    Assert.assertEquals(originalSimpleSubject.simpleSubjectId, simpleSubject.simpleSubjectId);
+    Assert.assertEquals(originalSimpleSubject.resourceId, simpleSubject.resourceId);
+    Assert.assertEquals(newPrincipal, simpleSubject.principal);
 
     String newPlainCredential = "credential_new";
     Assert.assertFalse(
@@ -193,7 +192,7 @@ public class AuthenticationSimpleTestComponent {
     String plainCredential = "credential";
     SimpleSubject simpleSubject = createWithResource(principal, plainCredential);
 
-    Assert.assertEquals(simpleSubject.getResourceId(),
+    Assert.assertEquals(simpleSubject.resourceId,
         resourceIdResolver.getResourceId(principal).get().longValue());
     Assert.assertFalse(resourceIdResolver.getResourceId(principal + principal).isPresent());
   }
