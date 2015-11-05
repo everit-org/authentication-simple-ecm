@@ -34,7 +34,7 @@ import org.everit.transaction.propagator.TransactionPropagator;
 import org.junit.Assert;
 import org.junit.Test;
 
-import com.mysema.query.sql.dml.SQLDeleteClause;
+import com.querydsl.sql.dml.SQLDeleteClause;
 
 import aQute.bnd.annotation.headers.ProvideCapability;
 
