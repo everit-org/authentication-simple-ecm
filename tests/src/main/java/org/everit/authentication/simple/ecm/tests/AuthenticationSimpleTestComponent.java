@@ -26,7 +26,7 @@ import org.everit.osgi.ecm.annotation.Service;
 import org.everit.osgi.ecm.annotation.ServiceRef;
 import org.everit.osgi.ecm.annotation.attribute.StringAttribute;
 import org.everit.osgi.ecm.annotation.attribute.StringAttributes;
-import org.everit.osgi.ecm.extender.ECMExtenderConstants;
+import org.everit.osgi.ecm.extender.ExtendComponent;
 import org.everit.persistence.querydsl.support.QuerydslSupport;
 import org.everit.resource.ResourceService;
 import org.everit.resource.resolver.ResourceIdResolver;
@@ -36,15 +36,12 @@ import org.junit.Test;
 
 import com.querydsl.sql.dml.SQLDeleteClause;
 
-import aQute.bnd.annotation.headers.ProvideCapability;
-
 /**
  * Test for {@link SimpleSubjectManager}.
  */
+@ExtendComponent
 @Component(componentId = "SimpleSubjectManagerTest",
     configurationPolicy = ConfigurationPolicy.OPTIONAL)
-@ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
-    value = ECMExtenderConstants.CAPABILITY_ATTR_CLASS + "=${@class}")
 @StringAttributes({
     @StringAttribute(attributeId = TestRunnerConstants.SERVICE_PROPERTY_TESTRUNNER_ENGINE_TYPE,
         defaultValue = "junit4"),

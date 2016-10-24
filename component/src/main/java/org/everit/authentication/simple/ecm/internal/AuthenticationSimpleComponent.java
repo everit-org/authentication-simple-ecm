@@ -29,27 +29,25 @@ import org.everit.osgi.ecm.annotation.Component;
 import org.everit.osgi.ecm.annotation.ConfigurationPolicy;
 import org.everit.osgi.ecm.annotation.Deactivate;
 import org.everit.osgi.ecm.annotation.ManualService;
+import org.everit.osgi.ecm.annotation.ManualServices;
 import org.everit.osgi.ecm.annotation.ServiceRef;
 import org.everit.osgi.ecm.annotation.attribute.StringAttribute;
 import org.everit.osgi.ecm.annotation.attribute.StringAttributes;
 import org.everit.osgi.ecm.component.ComponentContext;
-import org.everit.osgi.ecm.extender.ECMExtenderConstants;
+import org.everit.osgi.ecm.extender.ExtendComponent;
 import org.everit.persistence.querydsl.support.QuerydslSupport;
 import org.everit.resource.resolver.ResourceIdResolver;
 import org.osgi.framework.Constants;
 import org.osgi.framework.ServiceRegistration;
 
-import aQute.bnd.annotation.headers.ProvideCapability;
-
 /**
  * ECM component for {@link SimpleSubjectManager}, {@link Authenticator} and
  * {@link ResourceIdResolver} interface based on {@link AuthenticationSimpleImpl}.
  */
+@ExtendComponent
 @Component(componentId = AuthenticationSimpleConstants.SERVICE_FACTORYPID_AUTHENTICATION_SIMPLE,
     configurationPolicy = ConfigurationPolicy.FACTORY, label = "Everit Authentication Simple",
     description = "The component of the Authentication Simple.")
-@ProvideCapability(ns = ECMExtenderConstants.CAPABILITY_NS_COMPONENT,
-    value = ECMExtenderConstants.CAPABILITY_ATTR_CLASS + "=${@class}")
 @StringAttributes({
     @StringAttribute(attributeId = Constants.SERVICE_DESCRIPTION,
         defaultValue = AuthenticationSimpleConstants.DEFAULT_SERVICE_DESCRIPTION,
@@ -57,7 +55,8 @@ import aQute.bnd.annotation.headers.ProvideCapability;
         label = "Service Description",
         description = "The description of this component configuration. It is used to easily "
             + "identify the service registered by this component.") })
-@ManualService({ SimpleSubjectManager.class, Authenticator.class, ResourceIdResolver.class })
+@ManualServices(@ManualService({ SimpleSubjectManager.class, Authenticator.class,
+    ResourceIdResolver.class }))
 public class AuthenticationSimpleComponent {
 
   public static final int P1_SERVICE_DESCRIPTION = 1;
